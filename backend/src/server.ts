@@ -26,13 +26,32 @@ import addressRoutes from "./modules/addresses/address.routes.js";
 import orderRoutes from "./modules/orders/order.routes.js";
 import deliveryRoutes from "./modules/delivery/delivery.routes.js";
 import couponRoutes from "./modules/coupons/coupon.routes.js";
+import adminOrderRoutes from "./modules/admin-orders/admin-order.routes.js";
+import inventoryRoutes from "./modules/inventory/inventory.routes.js";
+import supplierRoutes from "./modules/suppliers/supplier.routes.js";
+import purchaseRoutes from "./modules/purchases/purchase.routes.js";
+import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
+import customerRoutes from "./modules/customers/customer.routes.js";
+import {
+  reviewPublicRoutes,
+  reviewAdminRoutes,
+} from "./modules/reviews/review.routes.js";
+import adminCouponRoutes from "./modules/admin-coupons/admin-coupon.routes.js";
+import {
+  bannerPublicRoutes,
+  bannerAdminRoutes,
+} from "./modules/banners/banner.routes.js";
+import {
+  settingsPublicRoutes,
+  settingsAdminRoutes,
+} from "./modules/settings/settings.routes.js";
+import reportsRoutes from "./modules/reports/reports.routes.js";
 
 dotenv.config();
 
 const app = express();
 const api = config.apiPrefix;
 
-// Security
 app.use(helmet());
 app.use(
   cors({
@@ -41,7 +60,6 @@ app.use(
   })
 );
 
-// Rate limiting
 const limiter = rateLimit({
   windowMs: config.rateLimit.windowMs,
   max: config.rateLimit.max,
@@ -54,11 +72,9 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// Body parsing
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-// Health check
 app.get("/health", (_req, res) => {
   res.json({
     success: true,
@@ -67,7 +83,6 @@ app.get("/health", (_req, res) => {
   });
 });
 
-// API root
 app.get(api, (_req, res) => {
   res.json({
     success: true,
@@ -76,7 +91,7 @@ app.get(api, (_req, res) => {
   });
 });
 
-// ── Public / Customer routes ───────────────
+// ── Public / Customer ──────────────────────
 app.use(`${api}/auth`, authRoutes);
 app.use(`${api}/categories`, categoryPublicRoutes);
 app.use(`${api}/collections`, collectionPublicRoutes);
@@ -87,13 +102,26 @@ app.use(`${api}/addresses`, addressRoutes);
 app.use(`${api}/orders`, orderRoutes);
 app.use(`${api}/delivery`, deliveryRoutes);
 app.use(`${api}/coupons`, couponRoutes);
+app.use(`${api}/banners`, bannerPublicRoutes);
+app.use(`${api}/settings`, settingsPublicRoutes);
+app.use(`${api}`, reviewPublicRoutes); // /products/:id/reviews
 
-// ── Admin routes ───────────────────────────
+// ── Admin ──────────────────────────────────
 app.use(`${api}/admin/categories`, categoryAdminRoutes);
 app.use(`${api}/admin/collections`, collectionAdminRoutes);
 app.use(`${api}/admin/products`, productAdminRoutes);
+app.use(`${api}/admin/orders`, adminOrderRoutes);
+app.use(`${api}/admin/inventory`, inventoryRoutes);
+app.use(`${api}/admin/suppliers`, supplierRoutes);
+app.use(`${api}/admin/purchases`, purchaseRoutes);
+app.use(`${api}/admin/dashboard`, dashboardRoutes);
+app.use(`${api}/admin/customers`, customerRoutes);
+app.use(`${api}/admin/reviews`, reviewAdminRoutes);
+app.use(`${api}/admin/coupons`, adminCouponRoutes);
+app.use(`${api}/admin/banners`, bannerAdminRoutes);
+app.use(`${api}/admin/settings`, settingsAdminRoutes);
+app.use(`${api}/admin/reports`, reportsRoutes);
 
-// 404
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -102,7 +130,6 @@ app.use((req, res) => {
   });
 });
 
-// Global error handler (must be last)
 app.use(errorMiddleware);
 
 app.listen(config.port, () => {

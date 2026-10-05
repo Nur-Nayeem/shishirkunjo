@@ -87,17 +87,17 @@
 
 ```bash
 # Register
-curl -X POST http://localhost:5000/api/v1/auth/register \
+curl -X POST http://localhost:4000/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{"name":"Test User","phone":"01712345678","password":"secret123"}'
 
 # Login
-curl -X POST http://localhost:5000/api/v1/auth/login \
+curl -X POST http://localhost:4000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"phone":"01712345678","password":"secret123"}'
 
 # Me
-curl http://localhost:5000/api/v1/auth/me \
+curl http://localhost:4000/api/v1/auth/me \
   -H "Authorization: Bearer <token>"
 ```
 
