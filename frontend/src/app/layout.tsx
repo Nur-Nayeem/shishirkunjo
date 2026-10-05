@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/components/layout/providers";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "শিশির কুঞ্জ | Shishir Kunjo",
+    default: "শিশির কুঞ্জ | হাতে তৈরি হোম ডেকর ও উপহার",
     template: "%s | শিশির কুঞ্জ",
   },
   description:
-    "ঘর সাজুক সৌন্দর্য আর ঐতিহ্যের ছোঁয়ায়। নির্বাচিত হোম ডেকর, নকশি, হাতে তৈরি ও গিফট পণ্য।",
+    "নির্বাচিত হোম ডেকর, ঐতিহ্যবাহী ও হাতে তৈরি পণ্যের সংগ্রহ। ঘর সাজুক সৌন্দর্য আর ঐতিহ্যের ছোঁয়ায়।",
   keywords: [
     "home decor",
-    "nakshi",
     "handmade",
+    "nakshi",
+    "jute",
     "bangladesh",
     "gift",
     "শিশির কুঞ্জ",
@@ -37,7 +41,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <Providers>
+          <Header />
+          <main className="min-h-[70vh]">{children}</main>
+          <Footer />
+        </Providers>
+      </body>
     </html>
   );
 }

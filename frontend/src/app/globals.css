@@ -1,64 +1,104 @@
 @import "tailwindcss";
 
 /* ============================================
-   শিশির কুঞ্জ — Design System
-   Theme: Earthy Heritage & Organic Minimalist
-   ============================================
-   Essence: Modern clean aesthetics + warm rustic
-   textures of traditional Bangladeshi crafts
-   (clay, jute, cotton, hand-threadwork).
-   Feel: Premium, calming, sustainable, slow-crafted.
+   শিশির কুঞ্জ — Nature Design System
+   Theme: Dew · Leaf · Earth · Craft
+   All colors via CSS variables only.
    ============================================ */
 
-@theme {
-  /* Core Surfaces */
-  --color-background: #FAF8F5;       /* Alabaster Warm Sand */
-  --color-foreground: #1C2E24;       /* Deep Forest Olive */
+:root {
+  /* Surfaces — morning mist & natural fiber */
+  --background: #f4f1ea;
+  --foreground: #1a2e1f;
 
-  /* Primary — Burnt Terracotta */
-  --color-primary: #C45A3F;
-  --color-primary-hover: #A3452E;
-  --color-primary-foreground: #FAF8F5;
+  /* Primary — deep leaf / forest canopy */
+  --primary: #2d5a3d;
+  --primary-hover: #234830;
+  --primary-foreground: #f7f5f0;
 
-  /* Secondary — Misty Sage */
-  --color-secondary: #E2ECE9;
-  --color-secondary-foreground: #2F4F4F;
+  /* Secondary — soft sage / moss wash */
+  --secondary: #e4ebe4;
+  --secondary-foreground: #2a3f32;
 
-  /* Accent — Harvest Gold */
-  --color-accent: #DFBA6B;
+  /* Accent — warm clay / terracotta earth */
+  --accent: #c4784a;
+  --accent-hover: #a8623a;
+  --accent-foreground: #faf8f4;
 
-  /* Muted — Soft Moss */
-  --color-muted: #7F8E85;
-  --color-muted-foreground: #7F8E85;
+  /* Muted — dried moss / stone */
+  --muted: #6b7c70;
+  --muted-foreground: #6b7c70;
 
-  /* Borders & Surfaces */
-  --color-border: #E2ECE9;
-  --color-card: #FFFFFF;
-  --color-card-foreground: #1C2E24;
-  --color-ring: #C45A3F;
+  /* Borders & cards */
+  --border: #d4ddd6;
+  --card: #faf8f4;
+  --card-foreground: #1a2e1f;
+  --ring: #2d5a3d;
 
   /* Semantic */
-  --color-destructive: #B54A3A;
-  --color-success: #4A7C59;
+  --destructive: #b54a3a;
+  --success: #3d6b4f;
+
+  /* Nature extras */
+  --leaf: #4a7c59;
+  --clay: #c4784a;
+  --sand: #e8e0d0;
+  --mist: #eef2ee;
+  --bark: #3d3226;
 
   /* Typography */
   --font-display: "Playfair Display", "Noto Serif Bengali", Georgia, serif;
   --font-sans: "Inter", "Noto Sans Bengali", system-ui, sans-serif;
   --font-bengali: "Noto Sans Bengali", "Inter", system-ui, sans-serif;
 
-  /* Border Radius — Craft scale */
-  --radius-craft-sm: 4px;
-  --radius-craft-md: 12px;
-  --radius-craft-lg: 24px;
-
-  /* Alias common radii to craft scale */
+  /* Radius — organic, not bubble */
   --radius-sm: 4px;
-  --radius-md: 12px;
-  --radius-lg: 24px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
   --radius-xl: 24px;
 
-  /* Organic Shadow */
-  --shadow-organic: 0 4px 20px -2px rgba(28, 46, 36, 0.04);
+  /* Shadow — soft forest light */
+  --shadow-organic: 0 4px 24px -4px rgba(26, 46, 31, 0.07);
+  --shadow-lift: 0 10px 36px -8px rgba(26, 46, 31, 0.12);
+}
+
+/* Tailwind v4 theme bridge — maps utilities to our variables */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-leaf: var(--leaf);
+  --color-clay: var(--clay);
+  --color-sand: var(--sand);
+  --color-mist: var(--mist);
+  --color-bark: var(--bark);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-bengali: var(--font-bengali);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-organic: var(--shadow-organic);
+  --shadow-lift: var(--shadow-lift);
 }
 
 /* Base */
@@ -67,65 +107,91 @@ html {
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display / Headings — Editorial Serif */
 h1, h2, h3, h4, .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
 }
 
-/* Bengali preference */
 .bn {
   font-family: var(--font-bengali);
 }
 
-/* Focus */
 *:focus-visible {
-  outline: 2px solid var(--color-ring);
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 
-/* Selection */
 ::selection {
-  background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
-  color: var(--color-foreground);
+  background-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  color: var(--foreground);
 }
 
-/* Global interactive transition rule */
-button,
-a,
-[role="button"],
+/* Utility classes — ONLY variables, no raw hex in components */
+.bg-background { background-color: var(--background); }
+.bg-foreground { background-color: var(--foreground); }
+.bg-card { background-color: var(--card); }
+.bg-primary { background-color: var(--primary); }
+.bg-primary-hover { background-color: var(--primary-hover); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+.bg-muted { background-color: var(--muted); }
+.bg-mist { background-color: var(--mist); }
+.bg-sand { background-color: var(--sand); }
+.bg-leaf { background-color: var(--leaf); }
+
+.text-foreground { color: var(--foreground); }
+.text-primary { color: var(--primary); }
+.text-primary-foreground { color: var(--primary-foreground); }
+.text-secondary-foreground { color: var(--secondary-foreground); }
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent); }
+.text-destructive { color: var(--destructive); }
+.text-success { color: var(--success); }
+.text-leaf { color: var(--leaf); }
+
+.border-border { border-color: var(--border); }
+.border-primary { border-color: var(--primary); }
+
+.shadow-organic { box-shadow: var(--shadow-organic); }
+.shadow-lift { box-shadow: var(--shadow-lift); }
+
+.rounded-craft-sm { border-radius: var(--radius-sm); }
+.rounded-craft-md { border-radius: var(--radius-md); }
+.rounded-craft-lg { border-radius: var(--radius-lg); }
+.rounded-craft-xl { border-radius: var(--radius-xl); }
+
 .transition-craft {
-  transition-property: all;
-  transition-duration: 300ms;
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: 280ms;
   transition-timing-function: ease-in-out;
 }
 
-/* Utility: Organic card */
-.card-organic {
-  background-color: var(--color-card);
-  border-radius: var(--radius-craft-md);
-  box-shadow: var(--shadow-organic);
-  border: 1px solid var(--color-border);
-}
-
-.card-organic:hover {
-  box-shadow: 0 8px 28px -4px rgba(28, 46, 36, 0.08);
-}
-
-/* Utility: Material badge */
+/* Material / nature badge */
 .badge-material {
-  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
-  color: var(--color-primary);
-  padding: 0.25rem 0.625rem;
-  font-size: 0.75rem;
+  background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  padding: 0.2rem 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  border-radius: 9999px;
   letter-spacing: 0.02em;
+  border-radius: 9999px;
+}
+
+/* Product / content cards */
+.card-lift {
+  background-color: var(--card);
+  box-shadow: var(--shadow-organic);
+  transition: box-shadow 280ms ease, transform 280ms ease;
+}
+.card-lift:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
 }

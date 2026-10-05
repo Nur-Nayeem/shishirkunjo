@@ -88,7 +88,7 @@ Guest cart items are merged into the user cart on successful login.
 cd backend
 npm install
 cp .env.example .env
-# Edit DATABASE_URL and PORT=5000
+# Edit DATABASE_URL and PORT=4000
 
 npx prisma generate
 npx prisma migrate dev --name init
@@ -99,10 +99,10 @@ npm run dev
 Then test:
 ```bash
 # Login as admin
-curl -X POST http://localhost:5000/api/v1/auth/login \
+curl -X POST http://localhost:4000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"phone":"01700000000","password":"admin123"}'
 
 # List products
-curl http://localhost:5000/api/v1/products
+curl http://localhost:4000/api/v1/products
 ```
